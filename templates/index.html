@@ -1,0 +1,42 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Web Calculator</h1>
+    <form action="/calculate" method="post">
+        <label for="num1">First number:</label>
+        <input type="text" name="num1" required>
+
+        <label for="operation">Operation:</label>
+        <select name="operation" required>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+
+        <label for="num2">Second number:</label>
+        <input type="text" name="num2" required>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if result %}
+        <p>{{ result }}</p>
+    {% endif %}
+
+    <h2>Recent Calculations</h2>
+    <ul>
+        {% for calculation in recent_calculations %}
+            <li>{{ calculation }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
